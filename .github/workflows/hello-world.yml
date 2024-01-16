@@ -11,6 +11,9 @@ on:
 
 jobs:
     print:
+        strategy:
+            matrix:
+              php-version: [8.1, 8.2, 8.3]
         runs-on: ubuntu-latest
         steps:
             - name: Checkout du code
@@ -21,7 +24,7 @@ jobs:
               with:
                 coverage: "xdebug"
                 extensions: "intl, mbstring, pdo_sqlite, zip"
-                php-version: 8.2
+                php-version: ${{ matrix.php-version }}
                 tools: composer:v2
 
             - name: "Install dependencies"
